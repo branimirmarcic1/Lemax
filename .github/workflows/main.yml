@@ -33,4 +33,4 @@ jobs:
     # 5. Pokretanje Unit Testova
     - name: Run Tests
       # Putanja do tvog test projekta je tests/UnitTest/
-      run: dotnet test tests/UnitTest/UnitTest.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
+      run: run: dotnet test src/UnitTest/UnitTest.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
