@@ -1,7 +1,10 @@
 ﻿using Lemax.Infrastructure.Common;
 using Lemax.Infrastructure.Mapping;
+using Lemax.Infrastructure.Middleware;
 using Lemax.Infrastructure.Persistence;
 using Lemax.Infrastructure.Persistence.Initialization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +21,7 @@ public static class Startup
     {
         MapsterSettings.Configure();
         return services
+            .AddExceptionMiddleware()
             .AddPersistence(config)
             .AddServices(config);
     }
@@ -28,5 +32,17 @@ public static class Startup
 
         await scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>()
             .InitializeDatabasesAsync(cancellationToken);
+    }
+
+    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder builder, IConfiguration config)
+    {
+        return builder
+            .UseExceptionMiddleware();
+    }
+
+    public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
+    {
+        builder.MapControllers();
+        return builder;
     }
 }
