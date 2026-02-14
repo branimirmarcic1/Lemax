@@ -1,4 +1,5 @@
-﻿using Lemax.Application.Hotels;
+﻿using Lemax.Application.Common.Models;
+using Lemax.Application.Hotels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -17,10 +18,19 @@ public sealed class HotelsController : BaseApiController
     }
 
     [HttpGet]
-    [OpenApiOperation("Dohvatite listu svih hotela.", "")]
-    public async Task<List<HotelDto>> GetListAsync(CancellationToken cancellationToken)
+    [OpenApiOperation("Dohvatite paginiranu listu svih hotela.", "")]
+    public async Task<ActionResult<PaginationResponse<HotelDto>>> GetListAsync(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            CancellationToken cancellationToken = default)
     {
-        return await _hotelsService.GetListAsync(cancellationToken);
+        if (page < 1) page = 1;
+        if (pageSize < 1) pageSize = 10;
+        if (pageSize > 100) pageSize = 100;
+
+        var result = await _hotelsService.GetListAsync(page, pageSize, cancellationToken);
+
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
@@ -51,5 +61,21 @@ public sealed class HotelsController : BaseApiController
     {
         await _hotelsService.DeleteAsync(id, cancellationToken);
         return NoContent();
+    }
+
+    [HttpGet("search")]
+    [OpenApiOperation("Pretraga hotela po lokaciji.", "Vraća paginiranu listu hotela.")]
+    public async Task<ActionResult<PaginationResponse<HotelSearchResultDto>>> SearchAsync(
+            [FromQuery] SearchHotelRequest request,
+            CancellationToken cancellationToken)
+    {
+        var result = await _hotelsService.SearchAsync(
+            request.Latitude,
+            request.Longitude,
+            request.Page,
+            request.PageSize,
+            cancellationToken);
+
+        return Ok(result);
     }
 }

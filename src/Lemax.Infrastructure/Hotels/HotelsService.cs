@@ -1,4 +1,5 @@
 ﻿using Lemax.Application.Common.Exceptions;
+using Lemax.Application.Common.Models;
 using Lemax.Application.Hotels;
 using Lemax.Domain;
 using Lemax.Infrastructure.Persistence.Context;
@@ -16,10 +17,23 @@ public class HotelsService : IHotelsService
         _lemaxDbContext = lemaxDbContext;
     }
 
-    public async Task<List<HotelDto>> GetListAsync(CancellationToken cancellationToken)
+    public async Task<PaginationResponse<HotelDto>> GetListAsync(
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
     {
-        List<Hotel> response = await _lemaxDbContext.Hotels.ToListAsync(cancellationToken);
-        return response.Adapt<List<HotelDto>>();
+        var query = _lemaxDbContext.Hotels.AsNoTracking();
+        int totalCount = await query.CountAsync(cancellationToken);
+
+        var hotels = await query
+            .OrderBy(x => x.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
+
+        var dtos = hotels.Adapt<List<HotelDto>>();
+
+        return new PaginationResponse<HotelDto>(dtos, totalCount, page, pageSize);
     }
 
     public async Task<HotelDto> GetByIdAsync(int id, CancellationToken cancellationToken)
@@ -82,5 +96,49 @@ public class HotelsService : IHotelsService
         _lemaxDbContext.Hotels.Remove(hotel);
         await _lemaxDbContext.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<PaginationResponse<HotelSearchResultDto>> SearchAsync(
+        double myLat,
+        double myLon,
+        int pageIndex,
+        int pageSize,
+        CancellationToken cancellationToken)
+    {
+        var hotels = await _lemaxDbContext.Hotels.AsNoTracking().ToListAsync(cancellationToken);
+
+        var query = hotels.Select(h => new HotelSearchResultDto
+        {
+            Name = h.Name,
+            Price = h.Price,
+            DistanceKM = CalculateDistance(myLat, myLon, h.Latitude, h.Longitude)
+        });
+
+        var sortedQuery = query.OrderBy(x => (double)x.Price + x.DistanceKM).ToList();
+
+        int totalCount = sortedQuery.Count;
+
+        var pagedData = sortedQuery
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        return new PaginationResponse<HotelSearchResultDto>(pagedData, totalCount, pageIndex, pageSize);
+    }
+
+    private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
+    {
+        const double R = 6371;
+        var dLat = ToRadians(lat2 - lat1);
+        var dLon = ToRadians(lon2 - lon1);
+
+        var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(ToRadians(lat1)) * Math.Cos(ToRadians(lat2)) *
+                Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        return Math.Round(R * c, 2);
+    }
+
+    private double ToRadians(double angle) => Math.PI * angle / 180.0;
 }
 

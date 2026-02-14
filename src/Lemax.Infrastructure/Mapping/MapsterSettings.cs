@@ -17,5 +17,6 @@ public class MapsterSettings
         // More details at https://github.com/MapsterMapper/Mapster/wiki/Custom-mapping
 
         TypeAdapterConfig<Hotel, HotelDto>.NewConfig();
+        TypeAdapterConfig<CreateHotelRequest, Hotel>.NewConfig();
     }
 }

@@ -13,7 +13,22 @@ public class HotelConfig : IEntityTypeConfiguration<Hotel>
 {
     public void Configure(EntityTypeBuilder<Hotel> builder)
     {
-        builder
-            .ToTable(nameof(Hotel), SchemaNames.Inventory);
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(200);
+
+        builder.Property(x => x.Price)
+            .IsRequired()
+            .HasPrecision(18, 2);
+
+        builder.Property(x => x.Latitude)
+            .IsRequired();
+
+        builder.Property(x => x.Longitude)
+            .IsRequired();
+            
+        builder.ToTable(nameof(Hotel), SchemaNames.Inventory);
     }
 }
