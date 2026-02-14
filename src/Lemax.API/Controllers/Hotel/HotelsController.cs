@@ -22,4 +22,11 @@ public sealed class HotelsController : BaseApiController
     {
         return await _hotelsService.GetListAsync(cancellationToken);
     }
+
+    [HttpPost]
+    [OpenApiOperation("Dodajte novi hotel.", "")]
+    public async Task<HotelDto> CreateAsync(CreateHotelRequest createHotelRequest, CancellationToken cancellationToken)
+    {
+        return await _hotelsService.CreateAsync(createHotelRequest, cancellationToken);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Lemax.Infrastructure.Common;
+using Lemax.Infrastructure.Mapping;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,6 +14,7 @@ public static class Startup
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
     {
+        MapsterSettings.Configure();
         return services
             .AddServices(config);
     }

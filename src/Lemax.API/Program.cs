@@ -1,8 +1,15 @@
+using FluentValidation.AspNetCore;
+using Lemax.Application.Hotels;
 using Lemax.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services
+    .AddControllers()
+    .AddFluentValidation(fv =>
+    fv.RegisterValidatorsFromAssemblyContaining<CreateHotelRequestValidator>());
+
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

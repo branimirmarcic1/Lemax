@@ -9,6 +9,11 @@ namespace Lemax.Infrastructure.Hotels;
 
 public class HotelsService : IHotelsService
 {
+    public Task<HotelDto> CreateAsync(CreateHotelRequest createHotelRequest, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<List<HotelDto>> GetListAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
