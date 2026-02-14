@@ -1,7 +1,3 @@
-Evo kompletnog **README.md** sadržaja. Sve je formatirano u Markdownu tako da ga možeš direktno kopirati u svoju datoteku.
-
----
-
 # Lemax Hotel Management & Search System
 
 Ovaj projekt predstavlja robusno **ASP.NET Core** rješenje za upravljanje hotelima i naprednu pretragu temeljenu na lokaciji korisnika. Glavni fokus sustava je balansiranje cijene i udaljenosti kako bi korisnik dobio optimalne rezultate prema zadanoj formuli ranga.
