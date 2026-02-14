@@ -23,13 +23,22 @@ internal static class Startup
 
         DatabaseSettings sqlDbSettings = databaseSettings.First(x => x.DBProvider.Equals(Databases.InMemory));
 
-        return services
+        services
             .Configure<DatabaseSettings>(config.GetSection(nameof(DatabaseSettings)))
-                .AddDbContext<LemaxDbContext>(m => m.UseDatabase(sqlDbSettings.DBProvider, sqlDbSettings.ConnectionString),
+            .AddDbContext<LemaxDbContext>(m => m.UseDatabase(sqlDbSettings.DBProvider, sqlDbSettings.ConnectionString),
                 contextLifetime: ServiceLifetime.Transient,
                 optionsLifetime: ServiceLifetime.Singleton)
-                .AddTransient<IDatabaseInitializer, DatabaseInitializer>()
-                .AddTransient<LemaxDbSeeder>();
+            .AddTransient<IDatabaseInitializer, DatabaseInitializer>()
+            .AddTransient<LemaxDbSeeder>();
+
+        var healthBuilder = services.AddHealthChecks();
+
+        if (sqlDbSettings.DBProvider.Equals(Databases.SQL, StringComparison.OrdinalIgnoreCase))
+        {
+            healthBuilder.AddSqlServer(sqlDbSettings.ConnectionString, name: "SQL-Server-Check");
+        }
+
+        return services;
     }
 
     internal static DbContextOptionsBuilder UseDatabase(this DbContextOptionsBuilder builder, string dbProvider, string connectionString)
