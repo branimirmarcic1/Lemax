@@ -1,0 +1,11 @@
+services:
+  lemax-api:
+    container_name: lemax-api-container
+    build:
+      context: .
+      dockerfile: src/Lemax.API/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
