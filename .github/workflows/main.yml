@@ -1,0 +1,36 @@
+name: Lemax CI
+
+# Definiramo kada se workflow pokreće
+on:
+  push:
+    branches: [ master ] # Pokreće se na svaki push na master
+  pull_request:
+    branches: [ master ] # Pokreće se na svaki Pull Request prema masteru
+
+jobs:
+  build-and-test: # Ovo ime mora odgovarati onome što ste upisali u Ruleset
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Dohvaćanje koda iz repozitorija
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Postavljanje .NET okruženja
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x # Koristimo verziju 8.0 jer je tako u .csproj datotekama
+
+    # 3. Restore paketa (NuGet)
+    - name: Restore dependencies
+      run: dotnet restore Lemax.sln # Putanja do tvoje solution datoteke
+
+    # 4. Build cijelog rješenja
+    - name: Build
+      run: dotnet build Lemax.sln --no-restore --configuration Release
+
+    # 5. Pokretanje Unit Testova
+    - name: Run Tests
+      # Putanja do tvog test projekta je tests/UnitTest/
+      run: dotnet test tests/UnitTest/UnitTest.csproj --no-build --configuration Release --collect:"XPlat Code Coverage"
