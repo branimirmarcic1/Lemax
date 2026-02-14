@@ -1,0 +1,12 @@
+{
+  "DatabaseSettings": [
+    {
+      "DBProvider": "sql",
+      "ConnectionString": "Server=localhost;Database=LemaxDb;Integrated Security=True;TrustServerCertificate=True;"
+    },
+    {
+      "DBProvider": "inmemory",
+      "ConnectionString": ""
+    }
+  ]
+}

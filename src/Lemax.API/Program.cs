@@ -1,9 +1,11 @@
 using FluentValidation.AspNetCore;
+using Lemax.API.Configurations;
 using Lemax.Application.Hotels;
 using Lemax.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.AddConfigurations();
 // Add services to the container.
 builder.Services
     .AddControllers()
@@ -18,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+await app.Services.InitializeDatabasesAsync();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
