@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
 using Lemax.API.Configurations;
-using Lemax.Application.Hotels;
+using Lemax.Application;
 using Lemax.Infrastructure;
 using Lemax.Infrastructure.Common;
 using Serilog;
@@ -20,31 +20,25 @@ try
         .ReadFrom.Configuration(builder.Configuration);
     });
 
-    builder.Services
-    .AddControllers()
-    .AddFluentValidation(fv =>
-    fv.RegisterValidatorsFromAssemblyContaining<CreateHotelRequestValidator>());
+    builder.Services.AddControllers();
+    builder.Services.AddFluentValidationAutoValidation();
+
+    builder.Services.AddEndpointsApiExplorer();
 
     builder.Services.AddInfrastructure(builder.Configuration);
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddApplication();
     builder.Services.AddSwaggerGen();
 
-    var app = builder.Build();
 
+    WebApplication? app = builder.Build();
     await app.Services.InitializeDatabasesAsync();
     app.UseInfrastructure(builder.Configuration);
-    // Configure the HTTP request pipeline.
+
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
-    app.UseHttpsRedirection();
-
-    app.UseAuthorization();
 
     app.MapEndpoints();
 

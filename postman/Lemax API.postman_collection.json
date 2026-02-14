@@ -17,7 +17,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/Hotels?page=1&pageSize=10",
+					"raw": "http://localhost:8080/api/hotels?page=1&pageSize=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -25,7 +25,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"Hotels"
+						"hotels"
 					],
 					"query": [
 						{
@@ -52,7 +52,7 @@
 						"value": "application/json"
 					}
 				],
-				"url": "http://localhost:8080/api/Hotels/1",
+				"url": "http://localhost:8080/api/hotels/1",
 				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: application/json\""
 			},
 			"response": []
@@ -69,14 +69,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"address\": \"Mihanovićeva ul. 1, 10000, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 150.0\r\n         }",
+					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 150.0\r\n         }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/Hotels",
+				"url": "http://localhost:8080/api/hotels",
 				"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/Hotels\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"address\": \"Mihanovićeva ul. 1, 10000, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 150.0\r\n         }'"
 			},
 			"response": []
@@ -93,14 +93,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"address\": \"Mihanovićeva ul. 1, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 175.0\r\n         }",
+					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 175.0\r\n         }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/Hotels/1",
+				"url": "http://localhost:8080/api/hotels/1",
 				"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"address\": \"Mihanovićeva ul. 1, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 175.0\r\n         }'"
 			},
 			"response": []
@@ -115,7 +115,7 @@
 						"value": "*/*"
 					}
 				],
-				"url": "http://localhost:8080/api/Hotels/1",
+				"url": "http://localhost:8080/api/hotels/1",
 				"description": "Generated from cURL: curl -X DELETE \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: */*\""
 			},
 			"response": []
@@ -131,7 +131,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/Hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5",
+					"raw": "http://localhost:8080/api/hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -139,7 +139,7 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"Hotels",
+						"hotels",
 						"search"
 					],
 					"query": [

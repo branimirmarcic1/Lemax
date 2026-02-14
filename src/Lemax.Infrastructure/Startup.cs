@@ -25,6 +25,8 @@ public static class Startup
         return services
             .AddExceptionMiddleware()
             .AddPersistence(config)
+            .AddRequestLogging(config)
+            .AddRouting(options => options.LowercaseUrls = true)
             .AddServices(config);
     }
 
@@ -39,7 +41,9 @@ public static class Startup
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder builder, IConfiguration config)
     {
         return builder
-            .UseExceptionMiddleware();
+            .UseExceptionMiddleware()
+            .UseRouting()
+            .UseRequestLogging(config);
     }
 
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
