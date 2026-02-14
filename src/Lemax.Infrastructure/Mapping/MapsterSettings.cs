@@ -3,12 +3,14 @@ using Lemax.Domain;
 using Mapster;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Mapping;
 
+[ExcludeFromCodeCoverage]
 public class MapsterSettings
 {
     public static void Configure()

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Lemax.Infrastructure.Middleware;
 
+[ExcludeFromCodeCoverage]
 internal static class Startup
 {
     internal static IServiceCollection AddExceptionMiddleware(this IServiceCollection services)

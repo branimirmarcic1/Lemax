@@ -2,10 +2,12 @@
 using Lemax.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Persistence.Initialization;
 
+[ExcludeFromCodeCoverage]
 internal class LemaxDbSeeder
 {
     public async Task SeedDatabaseAsync(LemaxDbContext dbContext)

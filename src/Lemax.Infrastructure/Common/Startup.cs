@@ -3,12 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Common;
 
+[ExcludeFromCodeCoverage]
 internal static class Startup
 {
     internal static IServiceCollection AddServices(this IServiceCollection services, IConfiguration config)

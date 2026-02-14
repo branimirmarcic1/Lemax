@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog;
 using Serilog.Context;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Lemax.Infrastructure.Middleware;
 
+[ExcludeFromCodeCoverage]
 public class RequestLoggingMiddleware : IMiddleware
 {
     public async Task InvokeAsync(HttpContext httpContext, RequestDelegate next)

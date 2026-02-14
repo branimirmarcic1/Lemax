@@ -2,9 +2,11 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Lemax.Infrastructure.Common.Services;
 
+[ExcludeFromCodeCoverage]
 public class NewtonSoftService : ISerializerService
 {
     public T Deserialize<T>(string text)

@@ -1,5 +1,8 @@
-﻿namespace Lemax.Infrastructure.Middleware;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Lemax.Infrastructure.Middleware;
+
+[ExcludeFromCodeCoverage]
 public class ErrorResult
 {
     public List<string> Messages { get; set; } = new();

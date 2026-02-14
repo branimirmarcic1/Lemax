@@ -7,12 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Persistence;
 
+[ExcludeFromCodeCoverage]
 internal static class Startup
 {
     internal static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration config)

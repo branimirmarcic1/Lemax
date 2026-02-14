@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrators", "Migrators", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.SQL", "src\Lemax.SQL\Lemax.SQL.csproj", "{C40F83AF-E64B-485F-8CE6-D66D158EB86C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "src\UnitTest\UnitTest.csproj", "{E7A82CFE-3E18-4715-807C-B2B31F17FF92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{C40F83AF-E64B-485F-8CE6-D66D158EB86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C40F83AF-E64B-485F-8CE6-D66D158EB86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C40F83AF-E64B-485F-8CE6-D66D158EB86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A82CFE-3E18-4715-807C-B2B31F17FF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A82CFE-3E18-4715-807C-B2B31F17FF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A82CFE-3E18-4715-807C-B2B31F17FF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A82CFE-3E18-4715-807C-B2B31F17FF92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{D29E0041-2DB7-4028-924E-138DAEF90AF5} = {F481F92D-FF8F-4D54-AC4E-E33879E37722}
 		{2681C4FD-BE5A-4EB9-B3BA-FE41A10FF392} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{C40F83AF-E64B-485F-8CE6-D66D158EB86C} = {2681C4FD-BE5A-4EB9-B3BA-FE41A10FF392}
+		{E7A82CFE-3E18-4715-807C-B2B31F17FF92} = {2B999980-3F7D-4A96-A078-0C6FEAE33DE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {716BA156-833F-4F5F-80D2-35AAD724F6B5}

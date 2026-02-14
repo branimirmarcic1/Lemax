@@ -2,11 +2,13 @@
 using Lemax.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Serilog;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Text;
 
 namespace Lemax.Infrastructure.Middleware;
 
+[ExcludeFromCodeCoverage]
 internal class ExceptionMiddleware : IMiddleware
 {
     private readonly ISerializerService _jsonSerializer;
