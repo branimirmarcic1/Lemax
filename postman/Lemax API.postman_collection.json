@@ -164,6 +164,15 @@
 				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5\" \\\r\n     -H \"accept: application/json\""
 			},
 			"response": []
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/health"
+			},
+			"response": []
 		}
 	]
 }

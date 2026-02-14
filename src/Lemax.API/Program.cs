@@ -27,8 +27,11 @@ try
 
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddApplication();
-    builder.Services.AddSwaggerGen();
-
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Lemax.API", Version = "1.0" });
+        options.DocInclusionPredicate((docName, apiDesc) => true);
+    });
 
     WebApplication? app = builder.Build();
     await app.Services.InitializeDatabasesAsync();
