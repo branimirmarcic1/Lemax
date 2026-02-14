@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.Infrastructure", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.API", "src\Lemax.API\Lemax.API.csproj", "{7B8D6594-CFC7-4231-B981-9D736C4076B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lwmax.Domain", "src\Lwmax.Domain\Lwmax.Domain.csproj", "{91396D39-1D2D-447C-BC06-E4A5329EA5EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.Domain", "src\Lemax.Domain\Lemax.Domain.csproj", "{91396D39-1D2D-447C-BC06-E4A5329EA5EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
