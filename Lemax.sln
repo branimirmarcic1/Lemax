@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36811.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2B999980-3F7D-4A96-A078-0C6FEAE33DE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{5C5D2E73-9F86-4153-823C-3807D0333C3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{162CF526-801C-46DE-8BAF-04302C12C470}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{587C2439-353C-4BEA-A009-DC6843FFE6DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.Application", "src\Lemax.Application\Lemax.Application.csproj", "{3E34D748-EC2E-48D0-868A-ACB77B405C63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.Infrastructure", "src\Lemax.Infrastructure\Lemax.Infrastructure.csproj", "{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lemax.API", "src\Lemax.API\Lemax.API.csproj", "{7B8D6594-CFC7-4231-B981-9D736C4076B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lwmax.Domain", "src\Lwmax.Domain\Lwmax.Domain.csproj", "{91396D39-1D2D-447C-BC06-E4A5329EA5EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E34D748-EC2E-48D0-868A-ACB77B405C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E34D748-EC2E-48D0-868A-ACB77B405C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E34D748-EC2E-48D0-868A-ACB77B405C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E34D748-EC2E-48D0-868A-ACB77B405C63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8D6594-CFC7-4231-B981-9D736C4076B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8D6594-CFC7-4231-B981-9D736C4076B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8D6594-CFC7-4231-B981-9D736C4076B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8D6594-CFC7-4231-B981-9D736C4076B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91396D39-1D2D-447C-BC06-E4A5329EA5EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91396D39-1D2D-447C-BC06-E4A5329EA5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91396D39-1D2D-447C-BC06-E4A5329EA5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91396D39-1D2D-447C-BC06-E4A5329EA5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C5D2E73-9F86-4153-823C-3807D0333C3D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{162CF526-801C-46DE-8BAF-04302C12C470} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{587C2439-353C-4BEA-A009-DC6843FFE6DF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{3E34D748-EC2E-48D0-868A-ACB77B405C63} = {5C5D2E73-9F86-4153-823C-3807D0333C3D}
+		{C1EF7F30-C9BA-4DC8-AFE0-C8EAB16449C5} = {162CF526-801C-46DE-8BAF-04302C12C470}
+		{7B8D6594-CFC7-4231-B981-9D736C4076B9} = {587C2439-353C-4BEA-A009-DC6843FFE6DF}
+		{91396D39-1D2D-447C-BC06-E4A5329EA5EB} = {5C5D2E73-9F86-4153-823C-3807D0333C3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {716BA156-833F-4F5F-80D2-35AAD724F6B5}
+	EndGlobalSection
+EndGlobal
