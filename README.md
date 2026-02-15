@@ -6,13 +6,22 @@ Ovaj projekt predstavlja robusno **ASP.NET Core** rješenje za upravljanje hotel
 
 ## 🏗️ Arhitektura sustava
 
-Projekt prati **Clean Architecture** principe, što omogućuje laku zamjenu komponenti (npr. promjena baze podataka ili eksternih servisa) bez utjecaja na samu poslovnu logiku.
+Projekt prati **Clean Architecture** principe, s jasno odvojenim slojevima radi lakšeg održavanja i skaliranja:
 
-* **Lemax.Domain**: Srce sustava. Sadrži entitete, konstante i osnovne modele podataka.
-* **Lemax.Application**: Sadrži poslovnu logiku, sučelja (Interfaces), DTO-ove, Mapster profile i validacijsku logiku (FluentValidation).
-* **Lemax.Infrastructure**: Implementacija tehničkih detalja: Entity Framework Core (In-Memory), Haversine formula za izračun udaljenosti i globalni Error Handling Middleware.
-* **Lemax.Api**: Izloženi REST endpointi, Swagger/NSwag dokumentacija i konfiguracija Dependency Injection-a.
-* **src/UnitTest**: Sveobuhvatni set testova koji osiguravaju točnost algoritma i integritet podataka.
+* **Core (Lemax.Domain & Lemax.Application)**: Srce sustava koje sadrži poslovnu logiku, entitete i sučelja.
+* **Infrastructure (Lemax.Infrastructure)**: Implementacija tehničkih detalja: EF Core, Identity servisi, Haversine formula i globalni Error Handling.
+* **Migrators (Lemax.SQL)**: Zaseban projekt zadužen za upravljanje SQL Server migracijama, čime se osigurava čistoća infrastrukture.
+* **Presentation (Lemax.API)**: REST endpointi grupirani pod `/api` prefiksom radi konzistentnosti.
+
+---
+
+## 🔐 Sigurnost (Authentication & Authorization)
+
+Sustav implementira cjeloviti sigurnosni okvir koristeći **ASP.NET Core Identity**:
+
+* **Autentifikacija**: Korisnici se mogu registrirati (`/api/register`) i prijaviti (`/api/login`) kako bi dobili **JWT Bearer Token**.
+* **Autorizacija**: Pristup kritičnim operacijama poput brisanja hotela zaštićen je **Role-based** pristupom (rola `Admin`).
+* **Centralizirane konstante**: Svi admin podaci i ključne postavke definirane su u `Lemax.Shared` projektu radi lakše promjene na jednom mjestu.
 
 ---
 
@@ -20,99 +29,57 @@ Projekt prati **Clean Architecture** principe, što omogućuje laku zamjenu komp
 
 Glavna odlika sustava je **Search** funkcionalnost koja rangira hotele prema sljedećoj logici:
 
-Algoritam izračunava zračnu udaljenost između korisnika (lat/long) i hotela pomoću Haversine formule, zbraja je s cijenom noćenja te sortira rezultate od najmanjeg prema najvećem zbroju. Time sustav inteligentno predlaže hotele koji su ili blizu ili iznimno povoljni.
+Algoritam izračunava zračnu udaljenost između korisnika i hotela pomoću Haversine formule, zbraja je s cijenom noćenja te sortira rezultate od najmanjeg prema najvećem zbroju.
 
 ---
 
 ## 🛠️ Tehnologije
 
 * **.NET 8.0**
-* **Entity Framework Core** (In-Memory provider za brzinu i jednostavnost testiranja)
-* **FluentValidation** (Stroga pravila za ulazne podatke)
-* **Mapster** (High-performance mapping)
-* **Serilog** (Strukturirano logiranje u konzolu i datoteke)
+* **Entity Framework Core** (SQL Server & In-Memory podrška)
+* **ASP.NET Core Identity** (JWT Bearer Tokeni)
+* **FluentValidation & Mapster**
+* **Serilog** (Strukturirano logiranje)
 * **xUnit & FluentAssertions** (Unit testiranje)
-* **Coverlet** (Praćenje pokrivenosti koda)
+
+---
+
+## 🐳 Docker i Monitoring
+
+Aplikacija je u potpunosti kontejnerizirana. Infrastrukturni monitoring (Health Check) dostupan je na: `http://localhost:8080/api/health`. Ovaj endpoint je javan kako bi ga vanjski sustavi za monitoring mogli nesmetano pozivati.
+
+---
+
+## 📮 Postman Kolekcija i Okruženja
+
+Za testiranje je pripremljena napredna Postman kolekcija koja koristi **Environments** za automatsko prebacivanje između okruženja:
+
+### 🌍 Dostupna okruženja:
+
+1. **Localhost**: Cilja izravni razvojni endpoint na `https://localhost:7021/api`.
+2. **Docker**: Cilja kontejneriziranu aplikaciju na `http://localhost:8080/api`.
+
+### 🤖 Automatizacija:
+
+* Kolekcija sadrži **Post-response skripte** koje automatski hvataju `accessToken` nakon prijave i spremaju ga u varijablu `{{token}}`.
+* Svi zaključani zahtjevi automatski nasljeđuju autentifikaciju s nivoa kolekcije, što omogućuje besprijekorno testiranje bez ručnog kopiranja tokena.
 
 ---
 
 ## 🤖 AI Utilization
 
-Sukladno zahtjevima zadatka (točka 2.5), u razvoju ovog rješenja korišteni su AI asistenti (ChatGPT/Gemini) kao partneri u "pair-programming" procesu. 
-Fokus korištenja AI-ja bio je na rješavanju specifičnih infrastrukturnih izazova i osiguravanju stabilnosti sustava. Ključni doprinosi AI asistencije: seeding-a putem IDatabaseInitializer sučelja. OpenAPI & Swagger Debugging: Dijagnostika i rješavanje problema s vidljivošću Minimal API rješenja unutar Swaggera, uključujući implementaciju WithOpenApi metapodataka. Production Readiness (Monitoring): Implementacija i konfiguracija Health Checks sustava koji inteligentno provjerava status SQL baze ovisno o konfiguraciji, što olakšava monitoring u produkcijskom okruženju.
+Sukladno zahtjevima, u razvoju rješenja korišteni su AI asistenti (ChatGPT/Gemini) za sljedeće zadatke:
+
+* **Arhitektura migracija**: Strategija odvajanja SQL migracija u zaseban `Lemax.SQL` projekt unutar `Migrators` mape.
+* **Identity & Swagger**: Rješavanje kolizija ruta pri mapiranju Identity endpointova te konfiguracija Swaggera za ispravan prikaz Bearer Token polja.
+* **Route Grouping**: Implementacija `MapGroup("/api")` za postizanje konzistentne strukture URL-ova i logičko grupiranje dokumentacije.
+* **Environment Logic**: Pomoć u definiranju logike za micanje "lokota" s javnih endpointova poput `/health` uz istovremeno zaključavanje poslovne logike.
 
 ---
 
-## 🐳 Docker (Brzi start)
+## ⚙️ Lokalni razvoj i Baza
 
-Aplikacija je u potpunosti kontejnerizirana. Da biste podigli cijeli sustav (API + konfiguracija), pokrenite sljedeću naredbu iz korijena projekta:
+Aplikacija podržava rad s pravom bazom putem EF Core migracija:
 
-```bash
-docker-compose up --build
-
-```
-
-Nakon podizanja, API i Swagger dokumentacija dostupni su na: `http://localhost:8080/swagger`
-
----
-
-## 🧪 Testiranje i Code Coverage
-
-Kvaliteta koda je verificirana visokim postotkom pokrivenosti testovima, s posebnim naglaskom na `Lemax.Application` sloj gdje se nalazi logika rangiranja.
-
-### 📊 Code Coverage Izvještaj
-
-| Sloj | Pokrivenost linija (Line Coverage) |
-| --- | --- |
-| **Lemax.Application** | **92.3%** |
-| **Lemax.Domain** | **100.0%** |
-| **Ukupno** | **88.4%** |
-
-**Kako generirati izvještaj lokalno:**
-
-1. Pokrenite testove: `dotnet test --collect:"XPlat Code Coverage"`
-2. Izvještaj u XML formatu će se generirati u mapi `src/UnitTest/TestResults`.
-3. Za vizualni HTML izvještaj koristite alat `ReportGenerator`.
-
----
-
-## 📮 Postman Kolekcija
-
-Za brzu provjeru API-ja, u mapi **`/postman`** nalazi se izvezena datoteka:
-`Lemax.postman_collection.json`
-
-**Upute za korištenje:**
-
-1. Otvorite Postman i kliknite na gumb **Import**.
-2. Odaberite datoteku iz `/postman` mape.
-3. Kolekcija sadrži pripremljene requestove za:
-* **CRUD operacije** (Create, Update, Delete, GetById).
-* **Search** (Pretraga s parametrima lokacije - Latitude/Longitude).
-
-
-
----
-
-## ⚙️ Lokalni razvoj (Manualno pokretanje)
-
-Ako ne želite koristiti Docker, projekt možete pokrenuti klasičnim putem:
-
-1. **Build:**
-```bash
-dotnet build
-
-```
-
-
-2. **Pokretanje API-ja:**
-```bash
-dotnet run --project src/Lemax.API
-
-```
-
-
-3. **Pokretanje testova:**
-```bash
-dotnet test
-
-```
+1. **Dodavanje migracije**: `dotnet ef migrations add <Ime> -p src/Lemax.SQL -s src/Lemax.API`.
+2. **Update baze**: `dotnet ef database update -p src/Lemax.SQL -s src/Lemax.API`.
