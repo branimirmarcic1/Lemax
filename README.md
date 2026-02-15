@@ -36,6 +36,13 @@ Algoritam izračunava zračnu udaljenost između korisnika (lat/long) i hotela p
 
 ---
 
+## 🤖 AI Utilization
+
+Sukladno zahtjevima zadatka (točka 2.5), u razvoju ovog rješenja korišteni su AI asistenti (ChatGPT/Gemini) kao partneri u "pair-programming" procesu. 
+Fokus korištenja AI-ja bio je na rješavanju specifičnih infrastrukturnih izazova i osiguravanju stabilnosti sustava. Ključni doprinosi AI asistencije: seeding-a putem IDatabaseInitializer sučelja. OpenAPI & Swagger Debugging: Dijagnostika i rješavanje problema s vidljivošću Minimal API rješenja unutar Swaggera, uključujući implementaciju WithOpenApi metapodataka. Production Readiness (Monitoring): Implementacija i konfiguracija Health Checks sustava koji inteligentno provjerava status SQL baze ovisno o konfiguraciji, što olakšava monitoring u produkcijskom okruženju.
+
+---
+
 ## 🐳 Docker (Brzi start)
 
 Aplikacija je u potpunosti kontejnerizirana. Da biste podigli cijeli sustav (API + konfiguracija), pokrenite sljedeću naredbu iz korijena projekta:
@@ -109,6 +116,3 @@ dotnet run --project src/Lemax.API
 dotnet test
 
 ```
-
-
-
