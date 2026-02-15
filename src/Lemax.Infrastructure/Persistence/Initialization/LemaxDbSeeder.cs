@@ -1,18 +1,29 @@
 ﻿using Lemax.Domain;
 using Lemax.Infrastructure.Persistence.Context;
+using Lemax.Shared;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Persistence.Initialization;
 
 [ExcludeFromCodeCoverage]
 internal class LemaxDbSeeder
 {
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
+
+    public LemaxDbSeeder(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    {
+        _userManager = userManager;
+        _roleManager = roleManager;
+    }
+
     public async Task SeedDatabaseAsync(LemaxDbContext dbContext)
     {
         await SeedHotelsAsync(dbContext);
+        await SeedUsersAsync(_userManager, _roleManager);
     }
 
     private async Task SeedHotelsAsync(LemaxDbContext dbContext)
@@ -59,5 +70,20 @@ internal class LemaxDbSeeder
 
         dbContext.Hotels.AddRange(hotels);
         await dbContext.SaveChangesAsync();
+    }
+
+    public async Task SeedUsersAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    {
+        if (!await roleManager.RoleExistsAsync(AdminAccount.Role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(AdminAccount.Role));
+        }
+
+        if (await userManager.FindByEmailAsync(AdminAccount.Email) == null)
+        {
+            var user = new IdentityUser { UserName = AdminAccount.Email, Email = AdminAccount.Email };
+            await userManager.CreateAsync(user, AdminAccount.Password);
+            await userManager.AddToRoleAsync(user, AdminAccount.Role);
+        }
     }
 }

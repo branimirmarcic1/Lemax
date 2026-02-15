@@ -116,10 +116,3 @@ dotnet run --project src/Lemax.API
 dotnet test
 
 ```
-
----
-
-## 🤖 AI Utilization
-
-Sukladno zahtjevima zadatka (točka 2.5), u razvoju ovog rješenja korišteni su AI asistenti (ChatGPT/Gemini) kao partneri u "pair-programming" procesu. Fokus korištenja AI-ja bio je na rješavanju specifičnih infrastrukturnih izazova i osiguravanju stabilnosti sustava.Ključni doprinosi AI asistencije:Tranzicija baze podataka: AI je korišten za kreiranje strategije prelaska s In-Memory baze na SQL Server uz očuvanje automatiziranog procesa migracija i seeding-a putem IDatabaseInitializer sučelja.OpenAPI & Swagger Debugging: Dijagnostika i rješavanje problema s vidljivošću Minimal API rješenja unutar Swaggera, uključujući implementaciju WithOpenApi metapodataka i rješavanje build errora vezanih uz namespace-ove.Production Readiness (Monitoring): Implementacija i konfiguracija Health Checks sustava koji inteligentno provjerava status SQL baze ovisno o konfiguraciji, što olakšava monitoring u produkcijskom okruženju.
-

@@ -21,7 +21,7 @@ internal static class Startup
     {
         List<DatabaseSettings>? databaseSettings = config.GetSection(nameof(DatabaseSettings)).Get<List<DatabaseSettings>>();
 
-        DatabaseSettings sqlDbSettings = databaseSettings.First(x => x.DBProvider.Equals(Databases.InMemory));
+        DatabaseSettings sqlDbSettings = databaseSettings.First(x => x.DBProvider.Equals(Aliases.InMemory));
 
         services
             .Configure<DatabaseSettings>(config.GetSection(nameof(DatabaseSettings)))
@@ -33,7 +33,7 @@ internal static class Startup
 
         var healthBuilder = services.AddHealthChecks();
 
-        if (sqlDbSettings.DBProvider.Equals(Databases.SQL, StringComparison.OrdinalIgnoreCase))
+        if (sqlDbSettings.DBProvider.Equals(Aliases.SQL, StringComparison.OrdinalIgnoreCase))
         {
             healthBuilder.AddSqlServer(sqlDbSettings.ConnectionString, name: "SQL-Server-Check");
         }
@@ -45,11 +45,11 @@ internal static class Startup
     {
         switch (dbProvider.ToLowerInvariant())
         {
-            case Databases.SQL:
+            case Aliases.SQL:
                 return builder.UseSqlServer(connectionString
                     , e => e.MigrationsAssembly("Lemax.SQL"));
 
-            case Databases.InMemory:
+            case Aliases.InMemory:
                 return builder.UseInMemoryDatabase("LemaxDb");
 
             default:

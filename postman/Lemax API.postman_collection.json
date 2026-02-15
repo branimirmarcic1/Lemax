@@ -1,178 +1,383 @@
 {
-	"info": {
-		"_postman_id": "681012fd-da9a-4bc2-98f4-64ce77d1ed12",
-		"name": "Lemax API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "2819387"
-	},
-	"item": [
-		{
-			"name": "Get All Hotels",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/hotels?page=1&pageSize=10",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"hotels"
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "1"
-						},
-						{
-							"key": "pageSize",
-							"value": "10"
-						}
-					]
-				},
-				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels?page=1&pageSize=10\" \\\r\n     -H \"accept: application/json\""
-			},
-			"response": []
-		},
-		{
-			"name": "Get Hotel by ID",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": "http://localhost:8080/api/hotels/1",
-				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: application/json\""
-			},
-			"response": []
-		},
-		{
-			"name": "Create Hotel",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 150.0\r\n         }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://localhost:8080/api/hotels",
-				"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/Hotels\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"address\": \"Mihanovićeva ul. 1, 10000, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 150.0\r\n         }'"
-			},
-			"response": []
-		},
-		{
-			"name": "Update Hotel",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 175.0\r\n         }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://localhost:8080/api/hotels/1",
-				"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"address\": \"Mihanovićeva ul. 1, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 175.0\r\n         }'"
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Hotel",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "accept",
-						"value": "*/*"
-					}
-				],
-				"url": "http://localhost:8080/api/hotels/1",
-				"description": "Generated from cURL: curl -X DELETE \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: */*\""
-			},
-			"response": []
-		},
-		{
-			"name": "Search Hotels",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"hotels",
-						"search"
-					],
-					"query": [
-						{
-							"key": "Latitude",
-							"value": "45.813"
-						},
-						{
-							"key": "Longitude",
-							"value": "15.977"
-						},
-						{
-							"key": "Page",
-							"value": "1"
-						},
-						{
-							"key": "PageSize",
-							"value": "5"
-						}
-					]
-				},
-				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5\" \\\r\n     -H \"accept: application/json\""
-			},
-			"response": []
-		},
-		{
-			"name": "Health Check",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:8080/health"
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "681012fd-da9a-4bc2-98f4-64ce77d1ed12",
+    "name": "Lemax API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2819387"
+  },
+  "item": [
+    {
+      "name": "Get All Hotels",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hotels?page=1&pageSize=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "pageSize",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels?page=1&pageSize=10\" \\\r\n     -H \"accept: application/json\""
+      },
+      "response": []
+    },
+    {
+      "name": "Get Hotel by ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hotels/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels",
+            "1"
+          ]
+        },
+        "description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: application/json\""
+      },
+      "response": []
+    },
+    {
+      "name": "Create Hotel",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 150.0\r\n         }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/hotels",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels"
+          ]
+        },
+        "description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/Hotels\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel\",\r\n           \"address\": \"Mihanovićeva ul. 1, 10000, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 150.0\r\n         }'"
+      },
+      "response": []
+    },
+    {
+      "name": "Update Hotel",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"price\": 175.0\r\n         }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/hotels/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels",
+            "1"
+          ]
+        },
+        "description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Esplanade Zagreb Hotel - Updated\",\r\n           \"address\": \"Mihanovićeva ul. 1, Zagreb\",\r\n           \"latitude\": 45.8052,\r\n           \"longitude\": 15.9761,\r\n           \"pricePerNight\": 175.0\r\n         }'"
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Hotel",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "accept",
+            "value": "*/*"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hotels/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels",
+            "1"
+          ]
+        },
+        "description": "Generated from cURL: curl -X DELETE \"http://localhost:8080/api/Hotels/1\" \\\r\n     -H \"accept: */*\""
+      },
+      "response": []
+    },
+    {
+      "name": "Search Hotels",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hotels",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "Latitude",
+              "value": "45.813"
+            },
+            {
+              "key": "Longitude",
+              "value": "15.977"
+            },
+            {
+              "key": "Page",
+              "value": "1"
+            },
+            {
+              "key": "PageSize",
+              "value": "5"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/Hotels/search?Latitude=45.813&Longitude=15.977&Page=1&PageSize=5\" \\\r\n     -H \"accept: application/json\""
+      },
+      "response": []
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registration",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"user@lemax.com\",\r\n  \"password\": \"LemaxPassword123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "if (jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"token\", jsonData.accessToken);\r",
+              "    console.log(\"Token je automatski spremljen u varijablu {{token}}!\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"user@lemax.com\",\r\n  \"password\": \"LemaxPassword123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login?useCookies=false",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ],
+          "query": [
+            {
+              "key": "useCookies",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "if (jsonData.accessToken) {\r",
+              "    pm.collectionVariables.set(\"token\", jsonData.accessToken);\r",
+              "    console.log(\"Token je automatski spremljen u varijablu {{token}}!\");\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"admin@lemax.com\",\r\n  \"password\": \"LemaxPassword123!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/login?useCookies=false",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "login"
+          ],
+          "query": [
+            {
+              "key": "useCookies",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
 }
