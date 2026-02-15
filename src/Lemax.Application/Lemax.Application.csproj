@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Lemax.Domain\Lemax.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Identity\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,7 @@
 ﻿using Lemax.Domain;
 using Lemax.Infrastructure.Persistence.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Lemax.Infrastructure.Persistence.Context;
 
-public class LemaxDbContext : DbContext
+public class LemaxDbContext : IdentityDbContext<IdentityUser>
 {
     public LemaxDbContext(DbContextOptions<LemaxDbContext> options)
         : base(options)

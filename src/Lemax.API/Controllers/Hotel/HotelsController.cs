@@ -1,11 +1,15 @@
 ﻿using Lemax.Application.Common.Models;
 using Lemax.Application.Hotels;
+using Lemax.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
 namespace Lemax.API.Controllers.Hotel;
 
+[Authorize]
+[ApiController]
 [OpenApiTag("Hotel", Description = "Upravljanje podacima o hotelima.")]
 [Route("api/[controller]")]
 public sealed class HotelsController : BaseApiController
@@ -54,6 +58,7 @@ public sealed class HotelsController : BaseApiController
         return await _hotelsService.UpdateAsync(id, request, cancellationToken);
     }
 
+    [Authorize(Roles = AdminAccount.Role)]
     [HttpDelete("{id}")]
     [OpenApiOperation("Obrišite hotel.", "")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -1,10 +1,13 @@
 ﻿using Lemax.Infrastructure.Common;
+using Lemax.Infrastructure.Identity;
 using Lemax.Infrastructure.Mapping;
 using Lemax.Infrastructure.Middleware;
 using Lemax.Infrastructure.Persistence;
 using Lemax.Infrastructure.Persistence.Initialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +25,7 @@ public static class Startup
         MapsterSettings.Configure();
 
         services
+            .AddIdentityAuth()
             .AddExceptionMiddleware()
             .AddPersistence(config)
             .AddRequestLogging(config)
@@ -47,14 +51,23 @@ public static class Startup
         return builder
             .UseExceptionMiddleware()
             .UseRouting()
-            .UseRequestLogging(config);
+            .UseRequestLogging(config)
+            .UseAuthentication()
+            .UseAuthorization();
     }
 
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
     {
         builder.MapControllers();
 
-        builder.MapGet("/health", async (HealthCheckService healthService) =>
+        var apiGroup = builder.MapGroup("/api");
+
+        var identityGroup = apiGroup.MapGroup("/")
+            .WithTags("Registracija i Login");
+
+        identityGroup.MapIdentityApi<IdentityUser>();
+
+        apiGroup.MapGet("/health", async (HealthCheckService healthService) =>
         {
             var report = await healthService.CheckHealthAsync();
             return report.Status == HealthStatus.Healthy
@@ -66,7 +79,6 @@ public static class Startup
         .WithOpenApi(operation =>
         {
             operation.Summary = "Application Health Status";
-            operation.Description = "Provjerava sustav i bazu podataka (SQL ili In-Memory).";
             return operation;
         });
 
